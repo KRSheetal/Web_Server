@@ -96,10 +96,12 @@
         let newListItem= document.createElement('li') //allocate a list for contents to be added
         newListItem.innerHTML= newName+', Id: ' + newId +', GPA: '+ newGPA//Set the innerHTML of the li element to a string containing the student's name, id, and GPA
         studentList.appendChild(newListItem) //add to the list and display
+        //clear the input text boxes
         nameInput.value=''
         idInput.value=''
         gpaInput.value=''
 
+        //update the student count
         studentCount++
 
 
@@ -107,6 +109,7 @@
 
     })
     //TODO add an event handler a list element to add class when clicked-FAILED
+    //TODO Add a click event handler to the new li element.  (3pt)
     function myFunction(){
         var element = document.getElementById("student-list");
         element.classList.toggle('.selected');
@@ -117,7 +120,7 @@
         let selectedElementRemove = document.querySelectorAll('.selected')
         selectedElementRemove.forEach(function (element){
             element.remove()
-            studentCount--
+            studentCount--//decrease the student count
         })
     })
 
