@@ -51,10 +51,6 @@
 
 <button id="remove-selected-students">Remove selected students</button>
 
-<!--TODO add function for a list element to add class when clicked-->
-<button onclick="myFunction()" class="selected"></button>
-
-
 <script>
 
     let nameInput= document.querySelector('#student-name')//student name input
@@ -63,12 +59,12 @@
     let studentList= document.querySelector('#student-list')//script for list
     let addButton= document.querySelector('#add-student')//script for add button
     let removeButton= document.querySelector('#remove-selected-students')//script for remove button
-    let studentCount= document.querySelector('#student-count')//script for student count
+    let studentCountSpan= document.querySelector('#student-count')//script for student count
 
-    studentCount=0
+    studentCount=0 //Initialize student count to 0
+    studentCountSpan.innerHTML=studentCount //set the element to student count value to display on the web page
 
     //Add event listener for add button
-
     addButton.addEventListener('click', function (){
         //read the text from the name input box
         let newName = nameInput.value
@@ -85,10 +81,9 @@
             return //returns and stops further
         }
 
-
         //read the GPA from student GPA input box
         let newGPA = gpaInput.value
-        if(newGPA.length===0 || newGPA > 4){ //if blank
+        if(newGPA.length===0 || newGPA > 4){ //if blank or greater than 4
             alert('Enter number between 0-4 in the "Student GPA" text box') //displays error message
             return //returns and stops further
         }
@@ -101,26 +96,27 @@
         idInput.value=''
         gpaInput.value=''
 
-        //update the student count
+        //span#student-count value to the new number of students (1pt)
         studentCount++
+        studentCountSpan.innerHTML=studentCount //update the student count element to display on the web page
 
 
-
-
+        //Add a click event handler to the new li element.  (3pt)
+  newListItem.addEventListener("click", function () {
+      // When the li element is clicked, add the class="selected" to that li element.
+      //When that li element is clicked again, remove the class="selected" from that li element
+      newListItem.classList.toggle('selected');
+  })
     })
-    //TODO add an event handler a list element to add class when clicked-FAILED
-    //TODO Add a click event handler to the new li element.  (3pt)
-    function myFunction(){
-        var element = document.getElementById("student-list");
-        element.classList.toggle('.selected');
-    }
 
-    //remove the elements with class=selected
+    //Add an event listener so that when button#remove-selected-students is clicked:
     removeButton.addEventListener('click', function (){
         let selectedElementRemove = document.querySelectorAll('.selected')
+        //Remove all of the elements with the class="selected" from the list.
         selectedElementRemove.forEach(function (element){
-            element.remove()
+            element.remove() //Using the remove() function on an element will remove it.
             studentCount--//decrease the student count
+            studentCountSpan.innerHTML=studentCount
         })
     })
 

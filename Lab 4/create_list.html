@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--add a title for the web page-->
+    <title>Create List</title>
+</head>
+<body>
+<!--add elements required with id, this will display in order on the web page-->
+  <p>Enter some text to add to the list</p>
+  <input id="new-text">
+  <button id="add-text">Add</button>
+  <button id="clear">Clear</button>
+
+<!--Empty unordered list-->
+  <ul id="list-of-text"></ul>
+
+<script>
+
+  //write your script here
+  let textInput= document.querySelector('#new-text')//script for text box input
+  let addButton= document.querySelector('#add-text')//script for add button
+  let textList= document.querySelector('#list-of-text')//script for creating a list
+  let clearButton= document.querySelector('#clear') //script for clear button
+
+  let elementsInList = 0 //tracking number of items in list
+  let maxElements = 10 //max number of elements in list
+
+  //add the input to the list when 'Enter' button is clicked
+  document.addEventListener('keyup', function () {
+    if (event.keyCode === 13 || event.key === 'Enter') {//TODO:I don't know why I see crossed over line on event
+      addButton.click()  //Click the addButton if user has typed some text
+    }
+  })
+  //add event listener for add button
+  addButton.addEventListener('click', function () {
+    //read the text in the input
+    let newText = textInput.value
+
+      //Add validation using JavaScript. The form should only accept text of length between 1 and 50 characters.
+    if (newText.length === 0){ //validate user has typed in some text
+      //alert('Enter some text')
+        //Ignore the user input if there is no text entered
+      return//if the input is blank and pressed 'Enter' or clicked 'Add' button, it doesn't add anything and shows above error message
+    } else if(newText.length >50){ //Display an alert error message if the text too is too long - more than 50 characters. Do not clear the text in the input.
+        alert('Enter text under 50 characters')
+        return
+    }
+    if (elementsInList >= maxElements){ //check the max is not exceeded
+      alert('no more elements can be added')//display error message when max exceeded
+      return //show error when max list reached
+    }
+
+    //create a new li element
+    let newListItem = document.createElement('li')
+    //the li element text should be the text from the input
+    newListItem.innerHTML = newText
+    //add the new li element as a child of the ul element
+    textList.appendChild(newListItem)
+    //clear the text in the input
+    textInput.value=''
+
+    elementsInList++ //counts the number of items in the list to keep a track
+
+    })
+
+  //clear the list when Clear button is clicked
+  clearButton.addEventListener('click',function (){
+    textList.innerHTML = '' //clears whole list
+    elementsInList = 0 //and will set the count to 0
+  })
+</script>
+
+</body>
+</html>
