@@ -65,29 +65,41 @@
     studentCountSpan.innerHTML=studentCount //set the element to student count value to display on the web page
 
     //Add event listener for add button
-    addButton.addEventListener('click', function (){
-        //read the text from the name input box
-        let newName = nameInput.value
-        //blank input validation
-        if(newName.length===0){ //if blank
-            alert('Enter some text in "Student Name" text box') //displays error message
-            return //returns and stops further
-        }
+    addButton.addEventListener('click', function () {
+        //Initialize Validate input alert strings
+        let nameAlert = 'Enter Student Name' //name text is blank
+        let idAlert = 'Enter Student ID' //if id is blank
+        let gpaAlert = 'Enter GPA between 0 to 4' //if gpa is blank are more than 4
+        let alertMessage = '' //to append alert above messages
 
-        //read the ID from student ID input box
+        //read the value of input to each string element
+        let newName = nameInput.value //save the value of input to a string element
         let newId = idInput.value
-        if(newId.length===0){ //if blank
-            alert('Enter some number in "Student ID" text box') //displays error message
-            return //returns and stops further
+        let newGPA = gpaInput.value
+
+        //check if name is blank
+        if (newName.length === 0) {
+            alertMessage = nameAlert+'\n' //append to alert message if blank
         }
 
-        //read the GPA from student GPA input box
-        let newGPA = gpaInput.value
-        if(newGPA.length===0 || newGPA > 4){ //if blank or greater than 4
-            alert('Enter number between 0-4 in the "Student GPA" text box') //displays error message
-            return //returns and stops further
+        //check if id is blank
+        if (newId.length === 0) {
+            alertMessage = alertMessage +idAlert+'\n'//append to alert message if blank
         }
-        //create a new list
+
+        //check if gpa is blank
+        if (newGPA.length === 0 || newGPA >4) {
+            alertMessage = alertMessage + gpaAlert+'\n'//append to alert message if blank or gpa more than 4
+        }
+
+        //display alert message if 'alertMessage' is not empty
+        if(alertMessage !== '') { //null=true
+            alert(alertMessage) //display alert message
+            return //return, do not add to list.
+        }
+
+
+        //create a new list with input values
         let newListItem= document.createElement('li') //allocate a list for contents to be added
         newListItem.innerHTML= newName+', Id: ' + newId +', GPA: '+ newGPA//Set the innerHTML of the li element to a string containing the student's name, id, and GPA
         studentList.appendChild(newListItem) //add to the list and display
