@@ -101,7 +101,8 @@
 
         //create a new list with input values
         let newListItem= document.createElement('li') //allocate a list for contents to be added
-        newListItem.innerHTML= newName+', Id: ' + newId +', GPA: '+ newGPA//Set the innerHTML of the li element to a string containing the student's name, id, and GPA
+        //Set the innerHTML of the li element to a string containing the student's name, id, and GPA. Using template string `${...}`
+        newListItem.innerHTML= `${newName}, Id: ${newId} , GPA: ${newGPA}`
         studentList.appendChild(newListItem) //add to the list and display
         //clear the input text boxes
         nameInput.value=''
